@@ -1,0 +1,101 @@
+#.bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+
+
+#####################################################
+# User defined area
+#####################################################
+#####################################################
+
+#############################
+# Path
+#############################
+export PATH=$HOME/mg-script:\
+$HOME/.local/bin:\
+$PATH:\
+$HOME/usr/bin:\
+$HOME/bin:\
+$HOME/platform-tools:\
+$HOME/.nix-profile/etc/profile.d/nix.sh:\
+$HOME/.nix-profile/bin/:\
+/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh:\
+$HOME/usr/local/bin/:\
+
+
+#############################
+# Environment
+#############################
+export VISUAL=nvim
+export EDITOR=nvim
+#export PAGER=less
+export LC_ALL=en_US.UTF-8
+#export LC_ALL=C #for nixpkgs
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+#ibus
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export SVDIR=~/service
+#fcitx
+#export GTK_IM_MODULE=fcitx
+#export XMODIFIERS=@im=fcitx
+#export QT_IM_MODULE=fcitx
+#fcitx5
+# export GTK_IM_MODULE=xim
+# export QT_IM_MODULE=fcitx5
+# export XMODIFIERS=@im=fcitx5
+# export LC_CTYPE=en_US.UTF-8
+# to display [mg@void ~]$ in bash
+export PS1="[\u@\h \W]$ "
+#export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive #tmp for nix joplin
+export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
+#export LEDGER_FILE=/home/mg/finance/2022.journal
+#export LEDGER_FILE=/home/mg/finance/2023.journal
+export LEDGER_FILE=/home/mg/finance/2024.journal
+#GPG_TTY=$(tty) for gpg
+#export GPG_TTY for gpg
+#
+#############################
+# Alias definitions.
+#############################
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+
+#############################
+# Appended by perl lib
+# perl -MCPAN -e 'install LWP::UserAgent::Cached
+PATH="/home/mg/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/mg/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/mg/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/mg/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/mg/perl5"; export PERL_MM_OPT;
+
+
+#############################
+# Misc
+#############################
+
