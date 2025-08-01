@@ -1,4 +1,5 @@
 ""https://github.com/junegunn/vim-plug
+""chezmoi addtest
 lua require('init')
 let mapleader =","
 set nocompatible
