@@ -1,0 +1,34 @@
+# proxyの設定
+https://github.com/manugarg/pacparser
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file#example_1
+https://github.com/mpv-player/mpv/issues/3373
+
+https://wiki.archlinux.jp/index.php/プロキシサーバー#SOCKS_.E3.83.97.E3.83.AD.E3.82.AD.E3.82.B7.E3.82.92.E4.BD.BF.E3.81.86
+
+#proxychains test
+proxychains4 curl ifconfig.me/ip
+
+
+#mullvad
+下記コマンドの結果を/etc/proxychains.confに設定｡
+hostnameのままだと､なぜかresolvされず?､エラーになるようだ
+    dig at4-wg.socks5.relays.mullvad.net
+もしくは､下記リスト参照(socks)
+    https://github.com/maximko/mullvad-socks-list/blob/list/mullvad-socks-list.txt
+
+#proxy-list
+- wg-quick up
+- firefox
+- librewolf
+- proxychains4
+- (torsocks)
+
+#pac setting
+https://docs.thousandeyes.com/product-documentation/global-vantage-points/enterprise-agents/proxy/writing-and-testing-proxy-auto-configuration-pac-files
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file
+
+
+# proxychains4
+https://github.com/haad/proxychains
+https://www.golinuxcloud.com/setup-proxychains-kali-linux/
+https://proxychains.sourceforge.net/howto.html

@@ -1,0 +1,10 @@
+#dns
+open resolverかどうか
+wget -qO - https://www.openresolver.jp/cli/check.html
+wget -qO - https://www.v2.openresolver.jp/checkme
+
+
+
+#dynv6
+https://community.dynv6.com/t/not-able-to-save-new-caa-record/1256
+caaレコードの登録が､defaultの0しかできない｡letsencryp.orgを用いるとき

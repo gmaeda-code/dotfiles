@@ -1,0 +1,10 @@
+https://wiki.archlinux.org/title/st
+
+#config like alacritty
+https://maximilian-schillinger.de/articles/st-as-alacritty-replacement.html
+
+ctrl shift pageup   #incerase font size
+
+#scroll
+https://st.suckless.org/patches/scrollback/
+https://st.suckless.org/patches/universcroll/

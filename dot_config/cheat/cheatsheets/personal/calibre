@@ -1,0 +1,8 @@
+calibre
+
+#commandline
+same directory
+    for f in *; do ebook-meta "$f" --tags rhubarb
+sub directory
+    find . -type f -exec ebook-meta '{}' --tags rhubarb ;
+        optional: -name "*.ebook"

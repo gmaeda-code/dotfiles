@@ -1,0 +1,9 @@
+#heic
+magick convert image.heic image.jpg
+ffmpeg -i image.heic image.png
+gimp?
+
+# webp
+# convert
+https://www.ubuntumint.com/convert-webp-to-png-jpeg-linux/
+https://winaero.com/convert-webp-png-linux/

@@ -1,0 +1,43 @@
+#shortcut
+https://www.makeuseof.com/google-maps-keyboard-shortcuts/
+https://defkey.com/google-maps-shortcuts
+
+#general
+TAB Navigate between controls on the screen
+############################################################
+#map
+## --------------------------------------------------------
+#zoom
+TABでmapにフォーカスした状態
+    検索窓の1つ前
++   zoom in
+-   zoom out
+
+arrow keys  move around
+shift + arrow keys  faster move?    
+
+# shortcut help
+ctrl + /
+
+# misc
+- Learn more about a place: Press the number associated with the place.
+- Tip: If there are more than 7 places in the highlighted area:
+
+    Press 9 to view more places.
+    Press 8 to return to previous places.
+
+#
+.   Show/hide menu
+,   Show/hide side panel
+Ctrl + Shift + 2    Show/hide traffic
+Ctrl + Shift + 5    Show/hide terrain
+
+############################################################
+#street view
+## --------------------------------------------------------
+a/left  Rotate camera 45 degrees in counter-clockwise direction
+d/right Rotate camera 45 degrees in clockwise direction
+w/up   前進
+s/down   後進
++   zoom in
+-   zoom out

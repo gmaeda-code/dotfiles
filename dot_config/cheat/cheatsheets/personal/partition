@@ -1,0 +1,27 @@
+#pertition
+#
+# swap
+vpsでの作成
+https://www.servernoobs.com/how-to-add-swap-to-a-kvm-vps-or-dedicated-server-centos-6/
+
+swapon -s
+	swapがあるかどうか
+df -h
+	filesystemの表示､lsblk的な?
+dd if=/dev/zero of=/swapfile bs=1024 count=1024k
+	1024MBのswap fileを作成
+	/swapfileは任意の名称
+
+mkswap /swapfile
+swapon /swapfile
+
+チェック
+	swapon -s
+	free -m
+
+vim /etc/fstab
+	paste:
+	/swapfile swap swap defaults 0 0
+
+chown root:root /swapfile
+chmod 0600 /swapfile

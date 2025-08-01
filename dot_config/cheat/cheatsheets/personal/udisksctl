@@ -1,0 +1,32 @@
+# To get info about a device:
+udisksctl info -b <device>
+
+# To mount a device:
+udisksctl mount --block-device <device>
+
+# To unmount a device:
+udisksctl unmount --block-device <device>
+
+# To get help:
+udisksctl help 
+
+
+#################
+# list
+udisksctl status
+
+# unlock
+udisksctl unlock -b /dev/<sdX>
+
+
+
+when plug
+udisksctl unlock -b /path/to/disk/partition
+udisksctl mount -b /path/to/unlocked/device
+
+
+when unpulg
+udisksctl unmount -b /path/to/unlocked/device
+udisksctl lock -b /path/to/disk/partition
+udisksctl power-off -b /path/to/disk/or/partition
+

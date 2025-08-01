@@ -1,0 +1,4 @@
+https://wiki.archlinux.org/title/Tor
+
+control portはプログラムでconfigの設定変更とかするときに用いられる｡nyxとか｡
+その場合でも､認証みたいなのは設定する｡

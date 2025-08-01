@@ -1,0 +1,11 @@
+#windows
+
+##iso
+https://www.microsoft.com/software-download/
+https://www.microsoft.com/en-us/software-download/windows10ISO
+
+## ddではインストールできないようで､woeusbを用いる
+https://unix.stackexchange.com/questions/312488/how-to-create-bootable-windows-10-image-in-debian
+https://github.com/WoeUSB/WoeUSB#run-from-source
+
+sudo woeusb --device local/of/my/windows-10-image.iso /dev/sdX

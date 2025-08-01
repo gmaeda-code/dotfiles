@@ -1,0 +1,37 @@
+# reading
+
+
+# news
+kindle(calibre news)
+    通常のrssだと読めない記事がある(scriptなど?)｡ネット環境が必要｡
+        もしくは､PC側でhttrack等でダウンロードしたものをcalibre等で移動させる?､フローを作るのが面倒だな｡
+    マス向けととして日常利用｡
+    単語登録も日常的に｡
+
+newsboat
+    テクノロジーや､更新情報など｡マス以外｡
+外出時とか､calibre(PC)が利用できないときは､スマホのニュース(RSS)
+    スマホでの単語登録は､ankidroidにする｡もしくは､elementで送信する｡
+
+# book
+kindle
+
+
+
+
+#################################
+#kindle
+
+wifiに接続すると､updateが自動でされるので､USBで繋ぐ｡
+
+#迂回策
+迂回策はamazonに塞がれうる｡
+block用のフォルダを作成
+amazon系のdnsをブロック?
+
+#calibre
+commandline interface
+https://manual.calibre-ebook.com/generated/en/cli-index.html
+
+#calibreをandroidで使用する
+https://libreddit.kavin.rocks/r/Calibre/comments/apzd1s/run_calibre_on_android/

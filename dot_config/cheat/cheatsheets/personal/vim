@@ -1,0 +1,488 @@
+---
+tags: [ vim ]
+---
+
+# vim plugin
+https://vimawesome.com/
+https://github.com/rockerBOO/awesome-neovim
+
+# problem
+lunarvimで､markdown｡
+bullet listとかの､-のsyntaxが改行時に反映(コピー)されない
+auto indent / comment / format/ とかが関係しているのか?
+https://superuser.com/questions/668395/vim-auto-comment-in-new-line
+
+
+# ダブりの行をhighlight
+https://stackoverflow.com/questions/1268032/how-can-i-mark-highlight-duplicate-lines-in-vi-editor#
+ただkindle のlocationだけでいい
+pythonとかでやったほうが良さそう｡
+
+#vimrc
+:help :map
+:help :noremap
+:help recursive_mapping
+:help :map-modes
+
+
+# cheatshet
+https://people.csail.mit.edu/vgod/vim/vim-cheat-sheet-en.png
+https://cdn.shopify.com/s/files/1/0165/4168/files/preview.png
+https://www.rosipov.com/images/posts/vim-movement-commands-cheatsheet.png
+https://github.com/lifepillar/vim-cheat40
+
+
+#paste without indent
+- :set paste / :set nopaste
+    set shortcut
+        .vimrc
+        set pastetoggle=<F3>
+- "+p
+
+
+# autocomplete
+ctrl y  #select
+ctrl e  #cancel?
+ctrl n  #down
+ctrl p  #up
+
+# case insensitive search
+:set ignorecase
+:set smartcase
+\c  case insensitive right after \c
+\C  case sensitive 
+
+# File management
+
+:e              reload file
+:q              quit
+:q!             quit without saving changes
+:w              write file
+:w {file}       write new file
+:x              write file and exit
+
+# Movement
+
+    k
+  h   l         basic motion
+    j
+
+w               next start of word
+W               next start of whitespace-delimited word
+e               next end of word
+E               next end of whitespace-delimited word
+b               previous start of word
+B               previous start of whitespace-delimited word
+0               start of line
+$               end of line
+gg              go to first line in file
+G               go to end of file
+gk		move down one displayed line
+gj		move up one displayed line
+
+# Insertion
+#   To exit from insert mode use Esc or Ctrl-C
+#   Enter insertion mode and:
+
+a               append after the cursor
+A               append at the end of the line
+i               insert before the cursor
+I               insert at the beginning of the line
+o               create a new line under the cursor
+O               create a new line above the cursor
+R               enter insert mode but replace instead of inserting chars
+:r {file}       insert from file
+
+# Editing
+
+u               undo
+yy              yank (copy) a line
+y{motion}       yank text that {motion} moves over
+p               paste after cursor
+P               paste before cursor
+<Del> or x      delete a character
+dd              delete a line
+d{motion}       delete text that {motion} moves over
+
+# Search and replace with the `:substitute` (aka `:s`) command
+
+:s/foo/bar/	replace the first match of 'foo' with 'bar' on the current line only
+:s/foo/bar/g	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
+:%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
+:%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement
+:6,10s/foo/bar/g    replace specific line
+
+
+Character classes
+.	any character except newline
+\w\d\s	word, digit, whitespace
+\W\D\S	not word, digit, whitespace
+[abc]	any of a, b, or c
+[^abc]	not a, b, or c
+[a-g]	character between a & g
+Anchors
+^abc$	start / end of the string
+\b\B	word, not-word boundary
+Escaped characters
+\.\*\\	escaped special characters
+\t\n\r	tab, linefeed, carriage return
+Groups & Lookaround
+(abc)	capture group
+\1	backreference to group #1
+(?:abc)	non-capturing group
+(?=abc)	positive lookahead
+(?!abc)	negative lookahead
+Quantifiers & Alternation
+a*a+a?	0 or more, 1 or more, 0 or 1
+a{5}a{2,}	exactly five, two or more
+a{1,3}	between one & three
+a+?a{2,}?	match as few as possible
+ab|cd	match ab or cd
+
+
+# Preceding a motion or edition with a number repeats it 'n' times
+# Examples:
+50k         moves 50 lines up
+2dw         deletes 2 words
+5yy         copies 5 lines
+42G         go to line 42
+
+# Multiple windows
+:e filename      - edit another file
+:split filename  - split window and load another file
+ctrl-w up arrow  - move cursor up a window
+ctrl-w ctrl-w    - move cursor to another window (cycle)
+ctrl-w_          - maximize current window
+ctrl-w=          - make all equal size
+10 ctrl-w+       - increase window size by 10 lines
+:vsplit file     - vertical split
+:sview file      - same as split, but readonly
+:hide            - close current window
+:only            - keep only this window open
+:ls              - show current buffers
+:.! <command>    - shell out
+
+# Buffers
+# move to N, next, previous, first last buffers
+:bn              - goes to next buffer
+:bp              - goes to prev buffer
+:bf              - goes to first buffer
+:bl              - goes to last buffer
+:b 2             - open buffer #2 in this window
+:new             - open a new buffer
+:vnew            - open a new vertical buffer
+:bd 2            - deletes buffer 2
+:wall            - writes all buffers
+:ball            - open a window for all buffers
+:bunload         - removes buffer from window
+:taball          - open a tab for all buffers
+
+# Pointers back
+ctrl-o
+
+# Pointers forward
+ctrl-o
+
+# Super search
+ctrl-p
+
+# To sort  a visual range on column 1 as a number:
+:'<,'>!sort -gk 1 -t ,
+
+# Map (in normal mode) the F2 key to a bash call `uuidgen`, then trim the `\n`
+# from the result, and put that in the expression register `"=`, then put that
+# before the cursor:
+nmap <F2> "= system("uuidgen")[:-2]<C-M>P
+
+# Delete every line that has a FOO in it. See `:help global`.
+# The _ in the d _ command ensures registers and clipboards are not changed.
+:g/FOO/d _
+
+
+###########################################################
+# User added
+# #########################################################
+# File management
+:e 	reload file
+:q 	quit
+:q! 	quit without saving changes
+:w 	write file
+:w {file} 	write new file
+:x | ZZ 	write file and exit
+
+
+# Navigation
+k 	up
+h 	left
+l 	right
+j 	down
+w 	next start of word
+W 	next start of whitespace-delimited word
+e 	next end of word
+E 	next end of whitespace-delimited word
+b 	previous start of word
+B 	previous start of whitespace-delimited word
+0 	start of line
+$ 	end of line
+gg 	go to first line in file
+G 	go to end of file
+Cursor movement
+
+   h - move cursor left
+   j - move cursor down
+   k - move cursor up
+   l - move cursor right
+   gj - move cursor down (multi-line text)
+   gk - move cursor up (multi-line text)
+   H - move to top of screen
+   M - move to middle of screen
+   L - move to bottom of screen
+   w - jump forwards to the start of a word
+   W - jump forwards to the start of a word (words can contain punctuation)
+   e - jump forwards to the end of a word
+   E - jump forwards to the end of a word (words can contain punctuation)
+   b - jump backwards to the start of a word
+   B - jump backwards to the start of a word (words can contain punctuation)
+   ge - jump backwards to the end of a word
+   gE - jump backwards to the end of a word (words can contain punctuation)
+   % - move to matching character (default supported pairs: '()', '{}', '[]' - use :h matchpairs in vim for more info)
+   0 - jump to the start of the line
+   ^ - jump to the first non-blank character of the line
+   $ - jump to the end of the line
+   g_ - jump to the last non-blank character of the line
+   gg - go to the first line of the document
+   G - go to the last line of the document
+   5gg or 5G - go to line 5
+   gd - move to local declaration
+   gD - move to global declaration
+   fx - jump to next occurrence of character x
+   tx - jump to before next occurrence of character x
+   Fx - jump to the previous occurrence of character x
+   Tx - jump to after previous occurrence of character x
+   ; - repeat previous f, t, F or T movement
+   , - repeat previous f, t, F or T movement, backwards
+   } - jump to next paragraph (or function/block, when editing code)
+   { - jump to previous paragraph (or function/block, when editing code)
+   zz - center cursor on screen
+   Ctrl + e - move screen down one line (without moving cursor)
+   Ctrl + y - move screen up one line (without moving cursor)
+   Ctrl + b - move back one full screen
+   Ctrl + f - move forward one full screen
+   Ctrl + d - move forward 1/2 a screen
+   Ctrl + u - move back 1/2 a screen
+
+
+# Insertion
+a 	append after the cursor
+A 	append at the end of the line
+i 	insert before the cursor
+I 	insert at the beginning of the line
+o 	create a new line under the cursor
+O 	create a new line above the cursor
+R 	enter insert mode but replace instead of inserting chars
+:r {file} 	insert from file
+
+# Editing
+u 	undo
+ctrl-r	redo
+yy 	yank (copy) a line
+y{motion} 	yank text that {motion} moves over
+p 	paste after cursor
+P 	paste before cursor
+<Del> or x 	delete a character
+dd 	delete a line
+d{motion} 	delete text that {motion} moves over
+
+# Search and replace
+:s/foo/bar/ 	replace the first match of 'foo' with 'bar' on the current line only
+:s/foo/bar/g 	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
+:%s/foo/bar/g 	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
+:%s/foo/bar/gc 	ask to manually confirm (`c` flag) each replacement
+
+# Multiple windows
+:e filename 	edit another file
+:split filename 	split window and load another file
+ctrl-w up arrow 	move cursor up a window
+ctrl-w ctrl-w 	move cursor to another window (cycle)
+ctrl-w_ 	maximize current window
+ctrl-w= 	make all equal size
+10 ctrl-w+ 	increase window size by 10 lines
+:vsplit file 	vertical split
+:sview file 	same as split, but readonly
+:hide 	close current window
+:only 	keep only this window open
+:ls 	show current buffers
+:b 2 	open buffer #2 in this window
+
+
+# Misc
+:noh clear last search highlight
+q: command history in vim
+q/ history of searches
+# substitute regex
+\v	avoid typing escapes with 
+()	capture group
+\1	set captured group
+
+
+# number
+:set number	number on
+:set nornu 	relative number off
+:set nonu	number off
+
+# wrap
+:set wrap
+:set nowrap
+
+# shortcut
+ZQ	:q!
+ZZ	:wq
+:x	:wq
+zz	display line center
+zt 	display at the top
+zb	bottom
+capslockをescとリマップ
+
+xset r rate 300 50	script that makes faster moving kjhl
+
+gx # open link in browser
+:ls list buffer
+:enew new unamed buffer
+c-n,c-p completion
+
+
+
+# command list except
+: = enter a command
+% = look at the whole file (could give a range of lines instead)
+s = search (and replace)
+/ = here comes the search term
+\\u = \u (the backslash is a special character, so to print it we have to escape it, and the escape character is the backslash)
+\( . . . \) = escaped pair of parentheses. These delimit a part of the search pattern we want to reuse later
+. . . . = four characters, any four (so we’ll match things like \u1234)
+/ = here comes the replacement string
+\& = put in an ampersand (must be escaped because it has a special function in Vim search/replace)
+#x = put in these two characters as-is
+\1 = use the first pattern we delimited with escaped parenthesis (in our case, there was only one — the four characters after \u)
+; = put in a semicolon (I’m always surprised I don’t have to escape it)
+/ = replace string is complete
+g = global (otherwise the replacement will only occur for the first match on each line)
+
+
+# word count
+https://vim.fandom.com/wiki/Word_count
+select
+g + ctrl g
+
+#pointer movement
+''  Return to the line where the cursor was before the latest jump.(Two single quotes.)
+``  Return to the cursor position before the latest jump (undo the jump).(Two back ticks. This is above the Tab key on some keyboards.)
+'.  Jump to the last-changed line.
+g;  Jump to the place of last edit. Can be quite helpful while debugging or editing files.
+ctrl o
+
+#recording
+qq  start recording
+q   stop recording
+10@q    repeat 10 times recorded action
+
+#image picture
+I know this is an old question, but try to use {{local:/images/picture.png}} instead. If you open :help vimwiki in Vim, you can find a part that says:
+In Vim, "file:" and "local:" behave the same, i.e. you can use them with both relative and absolute links. When converted to HTML, however, "file:" links will become absolute links, while "local:" links become relative to the HTML output directory. The latter can be useful if you copy your HTML files to another computer.
+
+image paste
+https://vimawesome.com/plugin/md-img-paste-vim
+
+
+#vim関連の設定ファイル
+required
+  mv ~/.config/nvim{,.bak}
+
+  optional but recommended
+    mv ~/.local/share/nvim{,.bak}
+  mv ~/.local/state/nvim{,.bak}
+  mv ~/.cache/nvim{,.bak}
+
+#loaded script list
+:scriptnames, :commands, :functions
+
+" where was an option set  
+:scriptnames            : list all plugins, _vimrcs loaded (super)  
+:verbose set history?   : reveals value of history and where set  
+:function               : list functions  
+:func SearchCompl       : List particular function
+
+#luaの中で vim scriptを使う
+https://www.reddit.com/r/neovim/comments/mkmbl0/initlua_beginner_can_i_source_a_vim_file_from/
+https://www.reddit.com/r/lunarvim/comments/oxktpl/running_vim_commands_in_configlua/
+
+# generating table of contents | toc
+https://stackoverflow.com/questions/14374227/table-of-contents-with-vim-folding
+https://github.com/mzlogin/vim-markdown-toc
+https://github.com/preservim/vim-markdown
+https://vimawesome.com/?q=table+of+contents
+https://vimawesome.com/?q=toc
+
+
+
+#markdown
+https://vimawesome.com/plugin/markdown-syntax
+https://codeinthehole.com/tips/writing-markdown-in-vim/
+
+#previous location
+https://stackoverflow.com/questions/53911/in-vim-how-do-i-go-back-to-where-i-was-before-a-search
+
+#############################################################
+#fold
+## --------------------------------------------------------
+https://vim.fandom.com/wiki/Folding
+:help fold-commands
+zi toggle folding feature
+zj next fold
+zk previous fold
+open / close
+    zc/zo/za close/open/toggle current fold
+    zC/zO/zA    close/open/toggle all folds(recursive)
+    zm/zr - Decrease/Increase fold level by one throughout the whole buffer(the cursor position is not relevant)
+    zM/zR sets foldlevel to infinite/0 -> close/open all open folds throughout the whole buffer(the cursor position is not relevant)
+zv expand folds to reveal cursor. ex after searching some words
+zx  Update folds: Undo manually opened and closed folds: re-apply 'foldlevel', then do "zv": View cursor line.
+fold level tree
+    :set foldcolumn=[n] 2? have a nice column to the left to see your folds
+fold method
+    manual – folds must be defined by entering commands (such as zf)
+        create a fold
+            zf{motion}
+                zf'a    fold from the current line to wherever the mark a has been set
+                zf3j    folds the current line along with the following 3 lines
+                zfa}    create a fold for the current code block | curly braces to delimit code blocks ({...})
+                    va}zf   visual mode / selecting the code block delimited by the curly braces -> creating the fold (zf).
+            :{range}fo[ld]   
+                :,+3fo  the current line along with the following three lines
+            zf mark a piece text as foldable
+                in visual mode (for example, hit V, then hit j multiple times to select how many lines you want, then zf to make them foldable).
+            zfap marks the entire paragraph
+        zd  delete the fold at the cursor (no text is deleted, just the fold markers); 
+        zD  recursively delete folds at the cursor.
+    indent – groups of lines with the same indent form a fold
+    syntax – folds are defined by syntax highlighting
+    expr – folds are defined by a user-defined expression. e.g. fold away text not matching a regular expression.
+    marker – special characters can be manually or automatically added to your text to flag the start and end of folds
+    diff – used to fold unchanged text when viewing differences (automatically set in diff mode)
+    setting fold method
+        set foldmethod=indent
+        autocmd FileType vim setlocal foldmethod=marker 特定のファイルタイプだけ｡
+        both indent and manual. put below in vimrc
+        '''
+            augroup vimrc
+                au BufReadPre * setlocal foldmethod=indent
+                au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+            augroup END
+        '''
+
+# horizontal scroll
+# :help scroll-horizontal
+zl
+zh
+zL
+zH

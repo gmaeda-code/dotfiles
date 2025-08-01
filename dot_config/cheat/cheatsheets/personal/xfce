@@ -1,0 +1,52 @@
+# desktop menuへ表示するには
+
+## Reference
+https://wiki.archlinux.jp/index.php/デスクトップエントリ
+
+# xfce app menu
+## desktop icon 
+/usr/share/xfce4/helpers/
+
+## ファイルの作成場所(user specific?)
+/home/mg/.local/share/applications/<name>.desktop
+
+## 書式:
+[Desktop Entry]
+Type=Application
+Exec=<exec-name>
+Name=<name>
+
+#-----------example------------------
+#/home/mg/.local/share/applications
+#-rw-r--r-- 1 mg mg   344 Nov 16  2021  anki.desktop
+[Desktop Entry]
+Name=Anki
+Comment=An intelligent spaced-repetition memory training program
+GenericName=Flashcards
+Exec=anki %f --no-sandbox
+TryExec=anki
+Icon=anki
+Categories=Education;Languages;KDE;Qt;
+Terminal=false
+Type=Application
+Version=1.0
+MimeType=application/x-apkg;application/x-anki;application/x-ankiaddon;
+Path=
+StartupNotify=false
+#-----------another example-----------
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=false
+Exec=evolution --component=mail %u
+Name=Evolution
+Comment=Custom definition for Evolution
+#-------------------------------------
+
+# 自動起動
+xfceの自動起動は､
+    ~/.config/autostart
+
+# thunar
+# debus-launch thunar

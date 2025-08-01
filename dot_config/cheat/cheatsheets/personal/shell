@@ -1,0 +1,40 @@
+#command
+^u  delete before
+^k  delete after 
+
+...
+#shell script cheat sheet
+https://devhints.io/bash
+
+#bash
+##########################################
+#zsh
+##########################################
+If I use zsh plugin framework, choose zgenom, along with quick-start-kit?
+## reference
+https://github.com/unixorn/zsh-quickstart-kit
+https://github.com/jandamm/zgenom
+https://wiki.archlinux.jp/index.php/Zsh
+## plugins list
+https://github.com/unixorn/awesome-zsh-plugins
+https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+## setting example
+https://gist.github.com/kvnxiao/618da3b8afc07e361a222a15ad1e334e
+
+
+
+
+
+############################################################
+#example
+## --------------------------------------------------------
+if [ "${former_proxy}" == "${new_proxy}" ]; then
+    echo "former is ${former_proxy}"
+    echo "newer is ${new_proxy}"
+    echo "former new same"
+elif [ "${former_prxy}" != "${new_proxy}" ]; then
+    echo "former is ${former_proxy}"
+    echo "newer is ${new_proxy}"
+    echo "former new not same"
+fi
+

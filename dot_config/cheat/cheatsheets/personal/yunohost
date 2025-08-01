@@ -1,0 +1,128 @@
+#yunohost
+#
+#
+#
+# yunohost-bk成功後に､最新のもの以外削除(6日以上前削除)
+#
+# 習慣
+1ヶ月に1回､容量が問題ないかチェック
+    圧迫していれば､logなどは削除｡logrotate出ない限り､手動で行う｡
+        問題がない状態で､削除であれば大丈夫だろう｡
+再起動&&diagnosis
+
+容量整理後のサーバー | df -H
+    Filesystem      Size  Used Avail Use% Mounted on
+    udev            1.6G     0  1.6G   0% /dev
+    tmpfs           324M  668k  323M   1% /run
+    /dev/vda1        41G   19G   20G  49% /
+    tmpfs           1.7G   17k  1.7G   1% /dev/shm
+    tmpfs           5.3M     0  5.3M   0% /run/lock
+    tmpfs           324M     0  324M   0% /run/user/58260
+
+logrotateで自動でできればいいのだけれど｡
+
+
+# ssh でbackspaceが使用できない
+stだとbackspace使える
+    kittyだと使えない
+export TERM=st-256color
+    export TERM=linux
+    とする
+
+# pleroma bot
+fedinesia
+feed2fedi
+
+#my_webapp用のsshの作成
+https://github.com/YunoHost-Apps/my_webapp_ynh
+https://yunohost.org/en/app_my_webapp
+
+#Passwordless sudo
+ When using the command line, sudo will now re-ask for the user password verytime. You can revert to passwordless sudo by going to Tools > YunoHost settings > Allow admins to use ‘sudo’ without re-typing their passwords. 
+ You can also do so from the CLI with yunohost settings set security.password.passwordless_sudo -v True
+
+# dns update dynv6
+ssh dyn
+hosts cookiehookey.v6.rocks set ipv4addr 192.3.59.151
+
+#log
+サイズが大きくなりすぎることがあるが､ファイル自体を削除することは可能
+自動的に､日毎､週毎とかで､rotateさせることもできるようだ
+https://forum.yunohost.org/t/synapse-logs-are-huge/19098/3
+
+自動でrotateできる?
+    https://github.com/YunoHost-Apps/shaarli_ynh/issues/83
+    update scriptに書く必要があるのか?
+    大抵はサービス自体で設定されている､設定するようになっている｡何を記録するか､どれくらい記録するか｡
+https://linuxconfig.org/logrotate
+
+# sizeが大きいファイル
+/var/www    5.4G アプリ
+    不要アプリの整理
+/var/log    7.7G    log
+    logのrotateがされない件は､不明
+        手動で1ヶ月に1回位整理すればいいかな｡
+            jitsiは2ヶ月ちょっと分で､1.9Gのログ
+            syslogは4日くらいで､
+/home/yunohost.backup   16G
+    前のものは処理(1versionくらいは残しておくか｡最悪rsyncしたら全部消してもいい)
+cacheとか?あるので､たまに再起動したほうがいいかも｡
+
+
+############################################################
+#synapse
+## --------------------------------------------------------
+https://github.com/YunoHost-Apps/synapse_ynh/issues/328
+#synapseのfederationをdisable
+configで設定できる?
+https://github.com/vector-im/element-web/blob/develop/docs/config.md
+
+federation_domain_whitelist: [] in the config file, 
+There is already a federation: section. Why not just (analog to other keywords) add an enable keyword?
+    federation:
+        enable: false
+        ...
+
+#synapse admin
+https://github.com/YunoHost-Apps/synapse-admin_ynh
+大勢に開放するようなわけでもない限り､特に不要? スパムの対策とか?
+
+#casが機能しない
+matrixのredirect用のURLがあるが､機能しない
+
+passwordでログインさせる
+    https://forum.yunohost.org/t/synapse-sign-in-webside-doesnt-work/26472/9
+    password_config:
+    # Uncomment to disable password login
+    #
+    enabled: true
+
+
+############################################################
+##cgnat bypass, portforwarding
+## --------------------------------------------------------
+https://forum.yunohost.org/t/homemade-wireguard-vpn-on-a-vps-server/15662␍
+https://forum.yunohost.org/t/tutorial-how-to-make-matrix-synapses-coturn-audio-video-calls-work-behind-a-vpn/17597␍
+https://serverfault.com/questions/1104101/nginx-reverse-proxy-through-wireguard-tunnel␍
+https://coolaj86.com/articles/reverse-vpn-turn-any-private-device-into-public-cloud-server/␍
+https://wiki.archlinux.org/title/iptables␍
+https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/␍
+https://dnotes.net/blogs/david-hunt/forwarding-tcp-traffic-iptables-and-ufw-1069␍
+https://www.debuntu.org/how-to-redirecting-network-traffic-to-a-new-ip-using-iptables/␍
+https://stackoverflow.com/questions/12945233/iptables-forward-and-input/23436938#23436938␍
+https://libreddit.kavin.rocks/r/WireGuard/comments/duif1e/my_config_for_bypassing_cgnat_with_vps/␍
+https://libreddit.kavin.rocks/r/WireGuard/comments/kmij3w/help_with_wireguard_behind_a_cgnat_using_vps/␍
+https://golb.hplar.ch/2019/01/expose-server-vpn.html
+https://www.digi77.com/the-art-of-port-forwarding-on-linux/
+https://npre.wordpress.com/2012/09/15/port-forwarding-with-iptables/
+
+############################################################
+#turn server test
+## --------------------------------------------------------
+https://community.hetzner.com/tutorials/install-turn-stun-server-on-debian-ubuntu-with-coturn/?PageSpeed=noscript␍
+http://truelogic.org/wordpress/2020/06/17/setup-your-own-stun-turn-server-using-coturn/␍
+https://gist.github.com/maxidorius/2b0acc2e707ae9a2d6d0267026a1024f␍
+https://matrix-org.github.io/synapse/latest/usage/configuration/config_documentation.html␍
+https://icetest.info/?␍
+https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/␍
+https://ourcodeworld.com/articles/read/1526/how-to-test-online-whether-a-stun-turn-server-is-working-properly-or-not

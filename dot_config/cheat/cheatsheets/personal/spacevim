@@ -1,0 +1,157 @@
+# SpaceVim
+  
+https://github.com/Gabirel/Hack-SpaceVim
+https://github.com/mhinz/vim-galore
+https://spacevim.org/documentation/
+https://github.com/Jackiexiao/10-minutes-to-SpaceVim
+
+# Tips
+better to use init.vim rather than init.toml.
+versitile
+
+#Updating Manually with git
+git -C ~/.SpaceVim pull
+
+#Updating from the SpaceVim Buffer
+Users can use command :SPUpdate SpaceVim to update SpaceVim. This command will open a new buffer to show the process of updating.
+
+# difference from vim
+vimcompatible = true
+
+# custom plugins
+https://spacevim.org/documentation/#custom-configuration
+
+# custom keybinding?
+https://spacevim.org/documentation/#bootstrap-functions
+
+# healthcheck
+:checkhealth
+
+# all available layer
+SPC h l 
+
+# add layers
+[SPC] f v d
+[[layers]]
+name = "name of your layer here"
+
+# color theme
+https://spacevim.org/documentation/#colorschemes
+
+
+#tab
+\ tabnumber	jump tab#
+gr	back and forth
+SPC tab	alternate buffer
+SPC tt	tab manager
+	in the tab manager
+	o	close/expand
+	r	rename
+	n	create new named tab below cursor tab
+	N	create new tab below the cursor tab
+	x	delete tab
+	ctrl-shift-up	move tab backward
+	ctrl-shift-down	move tab forward
+	enter	switch to the window under the cursor
+
+# file tree
+F3, SPC ft 	open file tree
+hjkl	down/up/expand/close
+enter	open file/switch to directory
+N	create new file under cursor
+r 	Rename the file under cursor
+d 	Delete the file under cursor
+K 	Create new directory under cursor
+y y 	Copy file full path to system clipboard
+y Y 	Copy file to system clipboard
+P 	Paste file to the position under the cursor
+. 	Toggle hidden files
+s v 	Split edit
+s g 	Vertical split edit
+p 	Preview
+i 	Switch to directory history
+v 	Quick look
+g x 	Execute with vimfiler associated
+' 	Toggle mark current line
+V 	Clear all marks
+> 	increase filetree screenwidth
+< 	decrease filetree screenwidth
+<Home> 	Jump to first line
+<End> 	Jump to last line
+Ctrl-Home 	Switch to project root directory
+Ctrl-r	Redraw
+
+#General usage
+h 	move cursor left
+j 	move cursor down
+k 	move cursor up
+l 	move cursor right
+<Up>, <Down> 	Smart up and down
+H 	move cursor to the top of the screen
+L 	move cursor to the bottom of the screen
+< 	Indent to left and re-select
+> 	Indent to right and re-select
+} 	paragraphs forward
+{ 	paragraphs backward
+Ctrl-f / Shift-Down / <PageDown> 	Smooth scrolling forwards
+Ctrl-b / Shift-Up / <PageUp> 	Smooth scrolling backwards
+Ctrl-d 	Smooth scrolling downwards
+Ctrl-u 	Smooth scrolling upwards
+Ctrl-e 	Smart scroll down (3 Ctrl-e/j)
+Ctrl-y 	Smart scroll up (3Ctrl-y/k)
+
+#Command line mode key bindings
+Ctrl-a 	move cursor to beginning
+Ctrl-b 	Move cursor backward in command line
+Ctrl-f 	Move cursor forward in command line
+Ctrl-w 	delete a whole word
+Ctrl-u 	remove all text before cursor
+Ctrl-k 	remove all text after cursor
+Ctrl-c/Esc 	cancel command line mode
+Tab 	next item in popup menu
+Shift-Tab 	previous item in popup menu
+
+#Mappings guide
+The prefixes are mapped to the following keys by default:
+Prefix name 	Custom options and default values 	Descriptions
+[SPC] 	NONE / <Space> 	default mapping prefix of SpaceVim
+[WIN] 	windows_leader / s 	window mapping prefix of SpaceVim
+<Leader> 	default vim leader 	\
+
+
+
+# override filetree key bindings
+If you want to override the default key bindings in filetree windows. You can use User autocmd in bootstrap function. for examples:
+
+function! myspacevim#before() abort
+    autocmd User NerdTreeInit
+        \ nnoremap <silent><buffer> <CR> :<C-u>call
+        \ g:NERDTreeKeyMap.Invoke('o')<CR>
+endfunction
+
+# in guide buffer
+Ctrl-h in guide buffer, you will get paging and help info in the statusline.
+u 	undo pressing
+n 	next page of guide buffer
+p 	previous page of guide buffer
+
+# edit mode
+>/Tab 	Indent to right and re-select
+< / Shift-Tab 	Indent to left and re-select
+Ctrl-Shift-Up 	move lines up
+Ctrl-Shift-Down 	move lines down# 
+
+
+#nerdtree
+mm  rename
+
+
+
+########################################
+# if want
+# enabling Scrollbar
+The scrollbar requires floating window of neovim or popup of vim8. It is disabled by default. To enable the scrollbar, you need to change enable_scrollbar option in ui layer.
+
+[[layers]]
+  name = "ui"
+  enable_scrollbar = true

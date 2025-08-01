@@ -1,0 +1,56 @@
+https://gohugo.io/getting-started/quick-start/
+https://gohugo.io/getting-started/usage/
+
+# front-matter example
+---
+title: "title"
+date: 2023-02-02
+categories: [Tech]
+tags: [Privacy,Mobile]
+description: ""
+draft: true
+---
+lastmod: 2022-07-13
+
+# build pages
+# public/ にできあがる｡
+hugo
+hugo --minify
+
+# new post
+hugo new post/test.md #default content/jp/~
+hugo new post/draft/test.md
+
+# comment
+https://discourse.gohugo.io/t/how-to-add-comments-in-a-template/75/19
+{{/* <!-- My comment --> */}}
+or
+{{/* 
+<!-- My comment -->
+*/}}
+
+# neocities
+https://neocities.org/cli
+
+
+# /~.md | /index.md | /_index.md の違い､使い分け
+https://discourse.gohugo.io/t/naming-content-files-index-md-vs-index-md-vs-foo-md/24043
+
+
+
+#########################################
+#example | recipi
+##################################
+# if
+{{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production")  }} {{end}}
+{{ if hugo.IsProduction }}<ifに合致するとき､実行する､表示する内容>{{ end }}
+####
+document.getElementById('js-on').style.display = 'block';
+document.getElementById('js-off').style.display = 'none';
+####
+
+  {{/*  window.setTimeout(function(){
+    document.getElementById('challenge-form').innerHTML = '<img src="/img/recaptcha.jpg" alt="recaptha-like">';
+}, 10000);*/}}
+###
+<script type="text/javascript">(js有効の時だけ実行する内容)</script>

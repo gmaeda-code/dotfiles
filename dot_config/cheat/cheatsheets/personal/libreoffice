@@ -1,0 +1,11 @@
+#libreoffice
+
+#cell edit
+f2
+shift ctrl f2
+
+#link clickable
+edit 最後の/をつけたり外したりしてenter
+
+# 上の行を固定
+https://ask.libreoffice.org/t/how-can-i-keep-the-first-row-in-libreoffice-calc-remain-on-top-when-scrolling/17223

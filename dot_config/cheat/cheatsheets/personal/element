@@ -1,0 +1,9 @@
+https://github.com/vector-im/element-desktop/issues/1029
+
+electronなので､初回､googleにアクセスがある｡
+    blockしたままだと､通信できない｡
+
+
+#起動時に白画面になる
+Delete the contents of ~/.config/Element/GPUCache
+element-desktop --disable-gpu --in-process-gpu

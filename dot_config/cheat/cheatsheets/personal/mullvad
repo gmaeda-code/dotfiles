@@ -1,0 +1,100 @@
+# Ip address
+curl https://ipv4.am.i.mullvad.net/port/56594
+curl https://am.i.mullvad.net/connected
+	You are connected to Mullvad (server sg4-wireguard). Your IP address is 94.198.43.36
+curl https://am.i.mullvad.net/ip
+	94.198.43.36
+curl https://am.i.mullvad.net/city
+	Singapore
+curl https://am.i.mullvad.net/country
+	Singapore
+
+curl https://api.myip.com
+#----------------
+#
+# mullvad app install on void
+https://lr.ggtyler.dev/r/voidlinux/comments/ovpgyv/mullvad_vpn_on_void
+nixとかでインストールして､サービス化すればいいか
+https://pastebin.com/raw/BA7qPeB0
+
+split tunnelとかかんたんにできる?
+できそう｡
+
+#----------------------------
+#mullvad-kill-switch
+
+[Interface]
+PrivateKey = cJne82rahb7SKlrz89t+QN6EMEcxFSs9IFJ4XsrkHlM=
+Address = 10.64.104.163/32
+DNS = 127.0.0.1
+PostUp = ufw allow out on mullvad-jp && ufw allow out to 138.199.21.239 port 51820
+PostDown = ufw delete allow out on mullvad-jp && ufw delete allow out to 138.199.21.239 port 51820
+#ufw allow out to 192.168.99.0/24
+#ufw allow in on mullvad-jp
+#nv /etc/default/ufw
+
+[Peer]
+PublicKey = AUo2zhQ0wCDy3/jmZgOe4QMncWWqrdME7BbY2UlkgyI=
+AllowedIPs = 0.0.0.0/0
+Endpoint = 138.199.21.239:51820
+---------------------------------
+
+mullvadでiptableで指定されていた分
+PostUp = iptables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
+PreDown = iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
+
+
+# mullvad app on void
+nix 
+    https://redlib.reallyaweso.me/r/voidlinux/comments/ovpgyv/mullvad_vpn_on_void
+
+mullvad(cli)
+    https://mullvad.net/en/help/how-use-mullvad-cli
+
+############################################################
+#server list
+# --------------------------------------------------------
+- hong kong
+hk-hkg-wg-socks5-101.relays.mullvad.net
+hk-hkg-wg-socks5-102.relays.mullvad.net
+hk-hkg-wg-socks5-103.relays.mullvad.net
+hk-hkg-wg-socks5-201.relays.mullvad.net
+hk-hkg-wg-socks5-202.relays.mullvad.net
+- japan
+jp-osa-wg-socks5-001.relays.mullvad.net
+jp-osa-wg-socks5-003.relays.mullvad.net
+jp-osa-wg-socks5-004.relays.mullvad.net
+jp-tyo-wg-socks5-001.relays.mullvad.net
+jp-tyo-wg-socks5-002.relays.mullvad.net
+jp-tyo-wg-socks5-101.relays.mullvad.net
+jp-tyo-wg-socks5-102.relays.mullvad.net
+jp-tyo-wg-socks5-103.relays.mullvad.net
+jp-tyo-wg-socks5-104.relays.mullvad.net
+jp-tyo-wg-socks5-105.relays.mullvad.net
+jp-tyo-wg-socks5-106.relays.mullvad.net
+jp-tyo-wg-socks5-107.relays.mullvad.net
+jp-tyo-wg-socks5-108.relays.mullvad.net
+jp-tyo-wg-socks5-201.relays.mullvad.net
+jp-tyo-wg-socks5-202.relays.mullvad.net
+jp-tyo-wg-socks5-203.relays.mullvad.net
+
+############################################################
+#foxproxy import list 
+# --------------------------------------------------------
+protocol://username:password@server:port?color=00ff00&title=some%20title&proxyDns=false&enabed=false&countryCode=DE&country=Germany&patternIncludesAll=false&patternExcludesIntranet=false
+socks5://jp-osa-wg-socks5-001.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-osa-wg-socks5-003.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-osa-wg-socks5-004.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-001.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-002.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-101.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-102.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-103.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-104.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-105.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-106.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-107.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-108.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-201.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-202.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true
+socks5://jp-tyo-wg-socks5-203.relays.mullvad.net:1080?proxydns=true&patternExcludesIntranet=true

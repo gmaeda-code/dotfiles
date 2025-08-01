@@ -1,0 +1,200 @@
+# General
+https://hledger.org/start.html
+https://devhints.io/hledger
+
+checking balance
+https://hledger.org/1.30/hledger.html#common-tasks
+
+reconcile
+https://hledger.org/1.30/hledger.html#reconciling
+
+# Import
+https://hledger.org/import-csv.html
+`hledger import cash.csv --dry-run`でテストラン｡同場所にcash.csv.rulesというファイルにルールを記載しておく｡
+
+# Daily usage
+Set initial balance
+ex) each year?
+https://hledger.org/1.26/hledger.html#common-tasks
+
+# command
+is -M
+bs --monthly
+
+
+#####################################
+#help menu
+# --------------------------------------------------------
+hledger [CMD] [OPTIONS] [ARGS]
+  hledger's main command line interface. Runs builtin commands and other
+  hledger executables. Type "hledger" to list available commands.
+
+General input flags:
+  -f --file=FILE             use a different input file. For stdin, use -
+                             (default: $LEDGER_FILE or $HOME/.hledger.journal)
+     --rules-file=RFILE      CSV conversion rules file (default: FILE.rules)
+     --alias=OLD=NEW         rename accounts named OLD to NEW
+     --anon                  anonymize accounts and payees
+     --pivot=TAGNAME         use some other field/tag for account names
+  -I --ignore-assertions     ignore any balance assertions
+  -s --strict                do extra error checking (check that all posted
+                             accounts are declared)
+
+General reporting flags:
+  -b --begin=DATE            include postings/txns on or after this date
+                             (will be adjusted to preceding subperiod start
+                             when using a report interval)
+  -e --end=DATE              include postings/txns before this date (will be
+                             adjusted to following subperiod end when using a
+                             report interval)
+  -D --daily                 multiperiod/multicolumn report by day
+  -W --weekly                multiperiod/multicolumn report by week
+  -M --monthly               multiperiod/multicolumn report by month
+  -Q --quarterly             multiperiod/multicolumn report by quarter
+  -Y --yearly                multiperiod/multicolumn report by year
+  -p --period=PERIODEXP      set start date, end date, and/or report interval
+                             all at once
+     --date2                 match the secondary date instead. See command
+                             help for other effects. (--effective, --aux-date
+                             also accepted)
+     --today=DATE            override today's date (affects relative smart
+                             dates, for tests/examples)
+  -U --unmarked              include only unmarked postings/txns (can combine
+                             with -P or -C)
+  -P --pending               include only pending postings/txns
+  -C --cleared               include only cleared postings/txns
+  -R --real                  include only non-virtual postings
+     --depth=NUM             (or -NUM): hide accounts/postings deeper than
+                             this
+  -E --empty                 show items with zero amount, normally hidden
+                             (and vice-versa in hledger-ui/hledger-web)
+  -B --cost                  show amounts converted to their cost/selling
+                             amount, using the transaction price.
+  -V --market                show amounts converted to period-end market
+                             value in their default valuation commodity.
+                             Equivalent to --value=end.
+  -X --exchange=COMM         show amounts converted to current (single period
+                             reports) or period-end (multiperiod reports)
+                             market value in the specified commodity.
+                             Equivalent to --value=end,COMM.
+     --value=TYPE[,COMM]     show amounts converted with valuation TYPE, and
+                             optionally to specified commodity COMM. TYPE can
+                             be:
+                             'then': convert to contemporaneous market value,
+                             in default valuation commodity or COMM (print &
+                             register commands only)
+                             'end':  convert to period-end market value, in
+                             default valuation commodity or COMM
+                             'now':  convert to current market value, in
+                             default valuation commodity or COMM
+                             YYYY-MM-DD: convert to market value on the given
+                             date, in default valuation commodity or COMM
+     --infer-equity          in conversion transactions, replace costs
+                             (transaction prices) with equity postings, to keep
+                             the transactions balanced
+     --infer-costs           infer costs (transaction prices) from manual
+                             conversion postings
+     --infer-market-prices   use transaction prices (recorded with @ or @@)
+                             as additional market prices, as if they were P
+                             directives
+     --auto                  apply automated posting rules to modify
+                             transactions
+     --forecast[=PERIODEXP]  Generate periodic transactions (from periodic
+                             transaction rules). By default these begin after
+                             the latest recorded transaction, and end 6 months
+                             from today, or at the report end date.
+                             Also, in hledger-ui, make future transactions
+                             visible.
+                             Note that = (and not a space) is required before
+                             PERIODEXP if you wish to supply it.
+  -c --commodity-style=COMM  Override the commodity style in the output for
+                             the specified commodity. For example
+                             'EUR1.000,00'.
+     --color=WHEN --colour   Should color-supporting commands use ANSI color
+                             codes in text output.
+                             'auto' (default): whenever stdout seems to be a
+                             color-supporting terminal.
+                             'always' or 'yes': always, useful eg when piping
+                             output into 'less -R'.
+                             'never' or 'no': never.
+                             A NO_COLOR environment variable overrides this.
+     --pretty[=WHEN]         Show prettier output, e.g. using unicode
+                             box-drawing characters.
+                             Accepts 'yes' (the default) or 'no'.
+                             If you provide an argument you must use '=', e.g.
+                             '--pretty=yes'.
+
+General help flags:
+  -h --help                  show general help (or after CMD, command help)
+     --man                   Show user manual with man
+     --info                  Show info manual with info
+     --debug=[N]             show debug output (levels 1-9, default: 1)
+     --version               show version information
+
+Examples:
+hledger                         list commands
+hledger CMD [--] [OPTS] [ARGS]  run a command (use -- with addon commands)
+hledger-CMD [OPTS] [ARGS]       or run addon commands directly
+hledger -h                      show general usage
+hledger CMD -h                  show command usage
+hledger help [MANUAL]           show any of the hledger manuals in various
+formats
+
+
+######################################
+# categoryの分け方について検討
+# --------------------------------------------------------
+https://www.quicken.com/blog/budget-categories
+https://mommanagingchaos.com/simple-budget/
+https://support.me.moneyforward.com/hc/ja/articles/900004380703-カテゴリの説明
+
+- Income
+- Housing
+- Transportation
+- Groceries/household goods
+- Utilities:
+	- water
+	- electricity
+	- gas
+- Healthcare
+- Saving, Investing, & Debt Payments
+- Personal Spending/Care
+	- clothing
+	- hair care
+- Entertainment
+- Miscellaneous
+
+
+- 食費
+    - 食料品、外食、カフェでのお茶代、飲み会代などがこのカテゴリに該当します。
+- 現金・カード
+    - 現金で支出した金額で、ATM引き落とし、カード引き落としがこのカテゴリに該当します。
+- 交通費
+    - 電車、バス、タクシー、飛行機などがこのカテゴリに該当します。
+- 趣味・娯楽
+    - 人それぞれで様々な趣味がありますが、マネーフォワード MEでは、アウトドア、スポーツ、映画・音楽・ゲーム、本、旅行などがこのカテゴリに該当します。
+- 日用品
+    - 子育てで使う費用、ドラッグストアでの買い物、ペット用品、たばこなどがこのカテゴリに該当します。
+- 衣服・美容
+    - 衣服、クリーニング、美容院・理髪代、化粧品、アクセサリーなどがこのカテゴリに該当します。
+- 特別な支出
+    - 定期的ではない支出、例えば、家具や家電の購入や住宅・リフォームなどがこのカテゴリに該当します。
+- 交際費
+    - 飲み会や大切な人へのプレゼント代、結婚式やお葬式などの冠婚葬祭などがこのカテゴリに該当します。
+- 住宅
+    - 家賃、住宅ローン、管理費・積立金、その他に住宅を維持していくための地震・火災保険などがこのカテゴリに該当します。
+- 水道・光熱費
+    - 電気、ガス、水道などがこのカテゴリに該当します。
+- 自動車
+    - ガソリン代、自動車ローン、駐車場料金、高速料金、自動車保険などがこのカテゴリに該当します。
+- 保険
+    - 生命保険、医療保険などがこのカテゴリに該当します。
+- 税・社会保障
+    - 所得税、住民税、年金保険料、健康保険などがこのカテゴリに該当します。
+- 教養・教育
+    - 学費や習い事、塾代、その他子育てに関する雑費がこのカテゴリに該当します。
+    - また、自分の教養を高めるために購入した本や雑誌などもこちらで管理することを推奨いたします。
+- 通信費
+    - 携帯電話代やインターネット代など、通信関係に必要な費用がこのカテゴリに該当します。
+- 健康・医療
+    - 医療費、薬、体調管理のフィットネスやボディケアなどがこのカテゴリに該当します。

@@ -1,0 +1,126 @@
+https://github.com/yutto-dev/yutto
+---
+yutto -tp {download_date@%Y-%m-%d %H:%M:%S}/{id} --batch 'url'
+pubdate@%Y-%m-%d %H:%M:%S}
+pythonの文字処理が使える?
+
+
+---
+usage: yutto [-h] [-v] [-n NUM_WORKERS] [-q {127,126,125,120,116,112,80,74,64,32,16}] [-aq {30251,30280,30232,30216}] [--vcodec DOWNLOAD_VCODEC:SAVE_VCODEC]
+             [--acodec DOWNLOAD_ACODEC:SAVE_ACODEC] [--output-format {infer,mp4,mkv,mov}] [--output-format-audio-only {infer,aac,flac,mp4,mkv,mov}] [- df {xml,ass,protobuf}]
+             [-bs BLOCK_SIZE] [-w] [-x PROXY] [-d DIR] [--tmp-dir TMP_DIR] [-c SESSDATA] [-tp SUBPATH_TEMPLATE] [-af ALIAS_FILE] [--metadata-format-premiered METADATA_FORMAT_PREMIERED]
+             [--video-only] [--audio-only] [--no-danmaku] [--danmaku-only] [--no-subtitle] [--subtitle-only] [--with-metadata] [ --metadata-only] [--no-color] [--no-progress] [--debug]
+             [--vip-strict] [--login-strict] [-b] [-p EPISODES] [-s] [--batch-filter-start-time BATCH_FILTER_START_TIME] [--batch-filter-end-time BATCH_FILTER_END_TIME ] [--no-inherit]
+             url
+
+yutto is a cute and willful B-site video downloader
+
+positional arguments:
+  url video homepage url or url list (requires file scheme)
+
+options:
+  -h, --help show this help message and exit
+  -v, --version show program's version number and exit
+
+common:
+  Common parameters
+
+  -n NUM_WORKERS, --num-workers NUM_WORKERS
+                        The maximum number of Workers used for downloading at the same time
+  -q {127,126,125,120,116,112,80,74,64,32,16}, --video-quality {127,126,125,120,116,112,80,74,64,32,16}
+                        Video definition level (127:8K, 126: Dolby Vision, 125:HDR, 120:4K, 116:1080P60, 112:1080P+, 80:1080P, 74:720P60, 64:720P, 32:480P, 16:360P)
+  -aq {30251,30280,30232,30216}, --audio-quality {30251,30280,30232,30216}
+                        Audio bit rate level (30280:320kbps, 30232:128kbps, 30216:64kbps)
+  --vcodec DOWNLOAD_VCODEC:SAVE_VCODEC
+                        Video encoding format (<Download format>:<Generation format>)
+  --acodec DOWNLOAD_ACODEC:SAVE_ACODEC
+                        Audio encoding format (<download format>:<generated format>)
+  --output-format {infer,mp4,mkv,mov}
+                        Output format (infer is automatic inference)
+  --output-format-audio-only {infer,aac,flac,mp4,mkv,mov}
+                        The output format used when containing only audio streams (infer is automatically inferred)
+  -df {xml,ass,protobuf}, --danmaku-format {xml,ass,protobuf}
+                        Barrage type
+  -bs BLOCK_SIZE, --block-size BLOCK_SIZE
+                        The size of each block when downloading in chunks, the unit is MiB, the default is 0.5MiB
+  -w, --overwrite force overwriting of downloaded content
+  -x PROXY, --proxy PROXY
+                        Set the proxy (auto is the system proxy, no is not using the proxy, of course you can also set the proxy value)
+  -d DIR, --dir DIR download directory, default is the running directory
+  --tmp-dir TMP_DIR is the directory used to store temporary files during the download process. The default is the download directory.
+  -c SESSDATA, --sessdata SESSDATA
+                        SESSDATA field in cookies
+  -tp SUBPATH_TEMPLATE, --subpath-template SUBPATH_TEMPLATE
+                        Storage path template for multi-level directories
+  -af ALIAS_FILE, --alias-file ALIAS_FILE
+                        Set url alias file path
+  --metadata-format-premiered METADATA_FORMAT_PREMIERED
+                        Date format specific to premiered fields in metadata files
+  --video-only download video stream only
+  --audio-only download audio stream only
+  --no-danmaku does not generate danmaku files
+  --danmaku-only only generate Danmaku files
+  --no-subtitle Do not generate subtitle files
+  --subtitle-only Generate subtitle files only
+  --with-metadata generate metadata files
+  --metadata-only Generate metadata files only
+  --no-color do not use color
+  --no-progress Do not display progress bar
+  --debug enable debug mode
+  --vip-strict Enable strict check for big members to take effect
+  --login-strict Enable strict checking of login status
+
+batch:
+  Batch download parameters
+
+  -b, --batch batch download
+  -p EPISODES, --episodes EPISODES
+                        anthology
+  -s, --with-section Download additional episodes (PV, trailers, special sections, etc.) at the same time
+  --batch-filter-start-time BATCH_FILTER_START_TIME
+                        Only download manuscripts published after this time (including the threshold)
+  --batch-filter-end-time BATCH_FILTER_END_TIME
+                        Only download manuscripts published before this time (excluding the critical value)
+
+batch file:
+  Batch download file parameters
+
+  --no-inherit Do not inherit parent parameters
+
+
+---
+https://github-com.translate.goog/yutto-dev/yutto?tab=readme-ov-file&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=wapp
+
+
+# Store subpath templates
+Parameter -tpor--subpath-template
+Optional parameter variables title | id | name | username | series_title | pubdate | download_date | owner_uid(there may be more in the future)
+default value"{auto}"
+You can flexibly control the video storage location by configuring sub-path templates.
+By default, yutto automatically controls the storage location. 
+    For example, when downloading a single video, it will be stored directly in the set root directory by default, {name}and a layer of container directories will not be created.
+        At this time, it is automatically selected as a template; 
+    when downloading in batches, a multi-level directory will be generated based on the video level, 
+        such as Fanjuhui Yes {title}/{name}, first of all, a directory with the name of the series will be generated in the setting root directory, 
+        and then the episode videos of each series will be stored in it, which facilitates the management of multiple different series. 
+        Of course, if you still want to store the drama directly in the set root directory, you can modify the parameter value {name}to .
+In addition, this function syntax is provided by the Python format function template syntax, so it also supports some advanced usage. 
+    For example {id:0>3}{name}, in addition, a custom time template syntax is specially added for time variables🕛 {pubdate@%Y-%m-%d %H:%M:%S}.
+    The default time template is %Y-%m-%d.
+It is worth noting that not all variables will be provided in all situations.
+    For example username, owner_uidthe variable is currently only provided in UP Master All Submitted Videos/Favorites/Watch Later, 
+    and it should not be used in other situations. 
+    The detailed scope description of each variable is shown in the table below:
+
+Variable	Description	Scope
+title	Overall title of the video series (title of the drama/title of the submitted video)	all
+id	Series video single p sequence number	all
+name	Series video single p title	all
+username	UP master username	Personal space, favorites, watch later, collection, video list download
+series_title	Collection title	Favorites, video collections, video list downloads
+pub date🕛	Submission date	Submit videos only
+download_date🕛	Download date	all
+owner_uid	UP 主UID	Personal space, favorites, watch later, collection, video list download
+Note
+
+Path variables and default path templates may be adjusted in the future.

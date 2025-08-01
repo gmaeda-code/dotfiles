@@ -1,0 +1,10 @@
+# Show the absolute path of your current working directory:
+pwd
+
+
+# print current directory without path
+pwd | grep -o '[^/]*$'
+pwd | awk -F / '{print $NF}'
+echo "$PWD" | sed 's!.*/!!'
+basename $(pwd)
+find $PWD -maxdepth 0 -printf "%f\n"

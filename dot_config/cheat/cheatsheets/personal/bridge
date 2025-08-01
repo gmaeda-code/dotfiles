@@ -1,0 +1,22 @@
+# bridgeの作成
+#
+how to make a bridge? 
+    https://askubuntu.com/questions/551680/how-to-do-virtual-networking-all-types-in-virt-manager
+
+## Reference
+https://wiki.archlinux.jp/index.php/ネットワークブリッジ
+
+## bridge-util
+#ブリッジの作成
+brctl addbr bridge_name
+
+#ブリッジにデバイスを追加
+brctl addif bridge_name eth0
+brctl show
+brctl delif bridge_name eth0
+
+# brctlは古いかも､iproute(bridge link)とかを使用する
+# ex) bridge link show
+#
+# KVMでブリッジの作成
+https://qiita.com/yoshiyasu1111/items/8d07a4fd55116fba07f7

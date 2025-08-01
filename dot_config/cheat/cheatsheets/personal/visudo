@@ -1,0 +1,5 @@
+# Visudo
+https://wiki.archlinux.jp/index.php/Sudo#visudo_.E3.82.92.E4.BD.BF.E3.81.86
+
+# コマンドについて
+許可するコマンドは､実際に実行してみて､journalctlのCOMMAND等でチェックすると実際のコマンドがわかる｡

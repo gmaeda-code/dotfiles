@@ -1,0 +1,127 @@
+# ref
+https://github.com/tomasklaen/uosc
+https://github.com/stax76/awesome-mpv
+
+# personal config
+https://github.com/junguler/dotfiles/tree/main/mpv
+
+# streaming app
+## anime
+https://github.com/pystardust/ani-cli
+## youtube
+https://codeberg.org/777/TubiTui
+
+======================
+mpv keyboard shortcuts
+======================
+https://wiki.archlinux.jp/index.php/Mpv
+https://gothub.no-logs.com/mpv-player/mpv/blob/master/etc/input.conf
+https://github.com/mpv-player/mpv/wiki
+https://github.com/mpv-player/mpv/issues/3373
+https://libreddit.kavin.rocks/r/mpv/comments/115c7ra/seek_percentage_of_playback_in_mpv_using_shortcut/
+https://www.maketecheasier.com/cheatsheet/mpv-keyboard-shortcuts/
+---
+https://defkey.com/mpv-media-player-shortcuts
+
+
+
+General
+-------
+
+P                       Pause / Playback
+F                       Toggle fullscreen
+M                       Mute
+V                       Toggle subtitles
+S                       Take a screenshot
+Shift + S               Take a screenshot without subtitles (may or may not
+work depending on display driver)
+Ctrl + S                Take a scaled screenshot with subtitles and OSD
+Alt + S                 Automatically take screenshot of every frame
+Q                       Quit, save current position
+O                       Show progress
+Shift + O               Toggle show progress
+Shift + T               Toggle video window on top
+
+
+Navigation
+----------
+
+Page Up / Down          Next / previous chapter
+.                       Next frame
+,                       Previous frame
+Left arrow / Right arrow Seek 5 seconds
+Shift + Left arrow / Right arrow Exact seek 1 seconds (don't show on the
+OSD)
+Up arrow / Down arrow   Seek 60 seconds
+Shift + Up arrow / Down arrow Exact seek 5 seconds (don't show on the OSD)
+Shift + Page Up / Down  Seek 600 seconds
+
+
+Playback
+--------
+
+Ctrl + +                Increase audio delay
+Ctrl + -                Decrease audio delay
+[                       Decrease speed
+]                       Increase speed
+M                       Mute / unmute audio
+Shift + A               Cycle aspect ratio ("16:9", "4:3", "2.35:1", "-1")
+1                       Decrease contrast
+2                       Increase contrast
+3                       Decrease brightness
+4                       Increase brightness
+5                       Decrease gamma
+6                       Increase gamma
+7                       Decrease saturation
+8                       Increase saturation
+9                       Decrease audio volume
+0                       Increase audio volume
+W                       Zoom out
+E                       Zoom in
+
+
+Subtitles
+---------
+
+V                       Show / hide subtitles
+J                       Next subtitle
+Shift + J               Previous subtitle
+Z                       Increase subtitle delay
+X                       Decrease subitle delay
+R                       Move subtitles up
+T                       Move subitles down
+Ctrl + Left arrow / Right arrow Skip to previous / next subtitle
+Ctrl + Shift + Left arrow Adjust timing to previous subtitle
+Ctrl + Shift + Right arrow Adjust timing to next subtitle
+
+
+Move video rectangle
+--------------------
+
+Alt + Left arrow        Add video pan-x 0.1
+Alt + Right arrow       Add video pan-x -0.1
+Alt + Up arrow          Add video pan-y 0.1
+Alt + Down arrow        Add video pan-y -0.1
+Alt + Backspace         Reset video zoom, video pan-x and video pan-y to 0
+
+
+Mouse
+-----
+
+Wheel up                Seek 10 seconds
+Wheel down              Seek -10 seconds
+Double click            Toggle fullscreen
+Right click             Toggle pause
+
+
+Misc
+----
+
+Ctrl + H                Cycle hardware decoding
+Ctrl + C                Quit
+
+Source
+
+Player Controls	
+> or Enter	Play the next file in a playlist.
+<	Play the previous file in a playlist.

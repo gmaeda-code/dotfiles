@@ -1,0 +1,32 @@
+# Integrity check
+
+## sha256sum
+$ sha256sum -c --ignore-missing sha256sum.txt
+https://docs.voidlinux.org/installation/index.html#verifying-images
+
+- sha256sum --check <file-name>.sha256sum |     shasum -a 256 [path to the file]
+	- sha256sumより前の部分が同じファイルをチェックする､OKとでればよし｡
+- もしくは､sha256sum <file-name> で自分で作成し､sha256sumファイルなり､webページのsha256sumと比較する
+- checksum自体の整合性をチェックするために､gpg keyを用いたりする｡
+	SHA512SUMSにisoのsha512､SHA512SUMS.signにsum自体の署名 
+	https://www.debian.org/CD/verify
+
+## gpg		
+- gpg --verify:
+	- https://gnupg.org/download/integrity_check.html
+	- $ gpg --verify <file-name>.sig|asc <file-name>
+	- ただ､予め公開鍵をimportしておく必要がある｡
+	- まだtrustedとしてmarkしてない場合は､公開されているfingerprintとだけ比較するということでも役には立つ
+	- Good signatureとでれば良い(trustedにする必要あり?)｡
+
+
+# alpine
+# https://docs.alpinelinux.org/user-handbook/0.1a/Installing/medium.html
+
+
+
+# MX
+# https://mxlinux.org/wiki/system/signed-iso-files/
+
+# antix
+# https://antixlinuxfan.miraheze.org/wiki/How_to_install#Verification_of_the_integrity_of_the_ISO_file

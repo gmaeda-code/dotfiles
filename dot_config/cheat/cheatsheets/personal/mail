@@ -1,0 +1,9 @@
+# mail server
+spam判定されているか
+リレーサーバーになっているか確認できる
+https://www.itti.jp/web-direction/spam-blacklist-release/
+
+mailq
+postsuper -d ALL
+postsuper -d ALL deferred
+

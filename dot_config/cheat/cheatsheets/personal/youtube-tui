@@ -1,0 +1,20 @@
+# youtube-tui
+https://siriusmart.github.io/youtube-tui/
+
+Function	Key(s)
+Select	Enter
+Deselect	Esc
+Cursor up	Up arrow / k
+Cursor down	Down arrow / j
+Cursor left	Left arrow / h
+Cursor right	Right arrow / l
+Previous page	Backspace / Alt + Left arrow
+First page history	Home
+Clear page history	End
+Paste from clipboard	Ctrl + V
+Next/previous entry on search and command	Ctrl + up/down arrow
+Next song	Ctrl + Shift + Right arrow
+Seek audio	Ctrl + left/right arrow
+Pause/resume audio	Space
+Enter command mode	:
+Quit	q

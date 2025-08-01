@@ -1,0 +1,16 @@
+# sshd settings
+
+
+
+MaxAuthTries
+         Specifies the maximum number of authentication attempts permitted per
+         connection.  Once the number of failures reaches half this value, additional 
+         failures are logged.  The default is 6.
+
+root
+password
+publickeyauthentication
+port number
+
+# tools
+tool sshguard, fail2ban

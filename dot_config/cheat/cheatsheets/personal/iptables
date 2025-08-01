@@ -1,0 +1,114 @@
+---
+tags: [ networking ]
+---
+https://my.esecuredata.com/index.php?/knowledgebase/article/49/how-to-redirect-an-incoming-connection-to-a-different-ip-address-on-a-specific-port-using-iptables/
+https://forum.yunohost.org/t/wireguard-vpn-on-yunohost-using-pihole-dns-ad-blocking/15763/4
+
+
+# 現在のルールセットと､ルールごとのヒット数
+iptables -nvL
+	# 行番号を表示し､ルール削除･追加をしやすくする
+	iptables -nvL --line-numbers
+iptables-save
+
+# FORWARD チェインのデフォルトポリシーを ACCEPT から DROP に変更
+iptables -P FORWARD DROP
+
+# ルールの読み込み,リセット
+iptables-restore < /etc/iptables/empty.rules
+	もしくは､個別にコマンドで､
+		[Iptables#ルールをリセットする](https://wiki.archlinux.jp/index.php/Iptables#.E3.83.AB.E3.83.BC.E3.83.AB.E3.82.92.E3.83.AA.E3.82.BB.E3.83.83.E3.83.88.E3.81.99.E3.82.8B)
+############################################################
+# Example
+############################################################
+# デフォルトでaccept
+iptables --policy INPUT ACCEPT
+iptables --policy OUTPUT ACCEPT
+iptables --policy FORWARD ACCEPT
+# デフォルトでdrop
+iptables --policy INPUT DROP
+iptables --policy OUTPUT DROP
+iptables --policy FORWARD DROP
+
+# block all connections from the IP address 10.10.10.10.
+iptables -A INPUT -s 10.10.10.10 -j DROP
+
+# block all of the IP addresses in the 10.10.10.0/24 network range. 
+iptables -A INPUT -s 10.10.10.0/24 -j DROP
+or
+iptables -A INPUT -s 10.10.10.0/255.255.255.0 -j DROP
+
+# block SSH connections from 10.10.10.10
+iptables -A INPUT -p tcp --dport ssh -s 10.10.10.10 -j DROP
+
+# block SSH connections from any IP address
+iptables -A INPUT -p tcp --dport ssh -j DROP
+
+# connection states (allow send back)
+# outputを許可するならば､returnされるデーターについてもINPUTで許可する必要がある｡
+# デフォルトの設定によっては個別に指定する必要はない｡
+iptables -A INPUT -p tcp --dport ssh -s 10.10.10.10 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED -j ACCEPT
+
+# Saving changes
+Make sure you save these commands in some way so that they are not lost when the server is restarted, since by default iptables configuration does not survive reboots.
+systemdのunit
+	iptables=/etc/iptables/iptables.rules
+	ip6tables=/etc/iptables/ip6tables.rules
+Ubuntu:
+	sudo /sbin/iptables-save
+Red Hat / CentOS:
+	/sbin/service iptables save
+Others
+	- /etc/init.d/iptables save
+	- iptables-save > /etc/iptables/iptables.rules
+	- iptables-save -f /etc/iptables/iptables.rules
+	- ip6tables-save -f /etc/iptables/ip6tables.rules
+
+
+# flush currently configured rules
+iptables -F
+
+
+# -----------------------------------
+# To show hit for rules with auto refresh:
+watch --interval 0 'iptables -nvL | grep -v "0     0"'
+
+# To show hit for rule with auto refresh and highlight any changes since the last refresh:
+watch -d -n 2 iptables -nvL
+
+# To block port 902 and hide this port from nmap:
+iptables -A INPUT -i eth0 -p tcp --dport 902 -j REJECT --reject-with icmp-port-unreachable
+
+# Note, --reject-with accept:
+#	icmp-net-unreachable
+#	icmp-host-unreachable
+#	icmp-port-unreachable <- Hide a port to nmap
+#	icmp-proto-unreachable
+#	icmp-net-prohibited
+#	icmp-host-prohibited or
+#	icmp-admin-prohibited
+#	tcp-reset
+
+# To add a comment to a rule:
+iptables ... -m comment --comment "This rule is here for this reason"
+
+
+# To remove or insert a rule:
+# 1) Show all rules
+iptables -L INPUT --line-numbers
+# OR iptables -nL --line-numbers
+
+# Chain INPUT (policy ACCEPT)
+#     num  target prot opt source destination
+#     1    ACCEPT     udp  --  anywhere  anywhere             udp dpt:domain
+#     2    ACCEPT     tcp  --  anywhere  anywhere             tcp dpt:domain
+#     3    ACCEPT     udp  --  anywhere  anywhere             udp dpt:bootps
+#     4    ACCEPT     tcp  --  anywhere  anywhere             tcp dpt:bootps
+
+# 2.a) REMOVE (-D) a rule. (here an INPUT rule)
+iptables -D INPUT 2
+
+# 2.b) OR INSERT a rule.
+iptables -I INPUT {LINE_NUMBER} -i eth1 -p tcp --dport 21 -s 123.123.123.123 -j ACCEPT -m comment --comment "This rule is here for this reason"
