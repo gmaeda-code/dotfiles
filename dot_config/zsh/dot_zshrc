@@ -61,7 +61,6 @@ unset rc
 # Path
 #############################
 export PATH=$HOME/mg-script:\
-$HOME/script-pub:\
 $HOME/.local/bin:\
 $PATH:\
 $HOME/usr/bin:\
