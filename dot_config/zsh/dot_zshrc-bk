@@ -1,0 +1,254 @@
+############################################################
+# load zgenom
+# --------------------------------------------------------
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+
+  echo "Creating a zgenom save"
+  # specify plugins here
+  zgenom ohmyzsh
+  #zgenom load chrissicool/zsh-256color
+  zgenom load djui/alias-tips
+  zgenom load robSis/zsh-completion-generator
+  zgenom load unixorn/fzf-zsh-plugin
+  #zgenom load unixorn/jpb.zshplugin
+  zgenom load unixorn/rake-completion.zshplugin
+  zgenom load zdharma-continuum/fast-syntax-highlighting
+  zgenom load zsh-users/zsh-autosuggestions
+  zgenom load zsh-users/zsh-completions
+  zgenom load zsh-users/zsh-history-substring-search
+
+  # generate the init script from plugins above
+  zgenom save
+
+fi
+
+
+############################################################
+# when it was bash | Source global definitions
+# --------------------------------------------------------
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+
+
+#####################################################
+# User defined area
+#####################################################
+#####################################################
+
+#############################
+# Path
+#############################
+export PATH=$HOME/mg-script:\
+$HOME/.local/bin:\
+$PATH:\
+$HOME/usr/bin:\
+$HOME/bin:\
+$HOME/platform-tools:\
+$HOME/.nix-profile/etc/profile.d/nix.sh:\
+$HOME/.nix-profile/bin/:\
+/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh:\
+$HOME/usr/local/bin/:\
+
+
+#############################
+# Environment
+#############################
+export VISUAL=nvim
+export EDITOR=nvim
+#export PAGER=less
+#
+#
+########################
+#language
+#https://wiki.archlinux.jp/index.php/Fcitx5
+export LC_ALL=en_US.UTF-8
+#export LC_ALL=C #for nixpkgs
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+#export LANGUAGE=ja_JP.UTF-8
+#ibus
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus
+#fcitx5
+#export GTK_IM_MODULE=xim
+#export GTK_IM_MODULE=fcitx
+#export QT_IM_MODULE=fcitx5
+#export XMODIFIERS=@im=fcitx5
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+#for kitty terminal
+export GLFW_IM_MODULE=ibus
+#########################
+
+
+
+#user space sv
+export SVDIR=~/service
+# export LC_CTYPE=en_US.UTF-8
+# to display [mg@void ~]$ in bash
+#export PS1="[\u@\h \W]$ "
+#export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive #tmp for nix joplin
+export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
+#export LEDGER_FILE=/home/mg/finance/2022.journal
+#export LEDGER_FILE=/home/mg/finance/2023.journal
+export LEDGER_FILE=/home/mg/finance/2024.journal
+#GPG_TTY=$(tty) for gpg
+#export GPG_TTY for gpg
+export CALIBRE_USE_DARK_PALETTE=1
+#############################
+# Alias definitions.
+#############################
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+
+#############################
+# Appended by perl lib
+# perl -MCPAN -e 'install LWP::UserAgent::Cached
+PATH="/home/mg/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/mg/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/mg/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/mg/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/mg/perl5"; export PERL_MM_OPT;
+
+
+#############################
+# Misc
+#############################
+# faster cursor movement vim
+xset r rate 300 50
+# preventing display from its going to blank
+#xset -q
+xset s off
+xset s noblank
+xset -dpms
+
+
+#cd ~/
+
+##dvtm start by default
+#export DVTM_TERM="st"
+#if [ -z "$DVTM" ]; then
+#  dvtm         
+#fi
+
+#tmux start by default
+# If not running interactively, do not do anything
+#[[ $- != *i* ]] && return
+#[[ -z "$TMUX" ]] && exec tmux
+
+
+
+############################################################
+# Luke's config for the Zoomer Shell
+# --------------------------------------------------------
+# Enable colors and change prompt:
+autoload -U colors && colors	# Load colors
+#PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+PS1="%B[%n@%M %{$fg[magenta]%}%~%{$reset_color%}]$%b "
+setopt autocd		# Automatically cd into typed directory.
+stty stop undef		# Disable ctrl-s to freeze terminal.
+setopt interactive_comments
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+#HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+HISTFILE=~/.zsh_history
+
+
+# Load aliases and shortcuts if existent.
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp -uq)"
+    trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' '^ulfcd\n'
+
+bindkey -s '^a' '^ubc -lq\n'
+
+bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'
+
+bindkey '^[[P' delete-char
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+bindkey -M vicmd '^[[P' vi-delete-char
+bindkey -M vicmd '^e' edit-command-line
+bindkey -M visual '^[[P' vi-delete
+
+# Load syntax highlighting; should be last.
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
