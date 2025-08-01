@@ -1,0 +1,136 @@
+#luke smith: https://invidious.namazso.eu/watch?v=dUFCRqs822w
+#https://newsboat.org/releases/2.29/docs/newsboat.html
+# external-url-viewer "urlview"
+cleanup-on-quit no
+keep-articles-days 1000
+max-items 1000
+
+# key-bind-------------------
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+
+
+
+macro y set browser "px mpv %u"; open-in-browser ; set browser "elinks %u"
+#macro y set browser "proxychains4 mpv %u"; open-in-browser ; set browser "elinks %u"
+macro o set browser "firefox %u"; open-in-browser ; set browser "elinks %u"
+macro l set browser "librewolf %u"; open-in-browser ; set browser "elinks %u"
+#macro l set browser "browser-open %u"; open-in-browser ; set browser "elinks %u"
+#macro l set browser "/home/mg/.nix-profile/bin/librewolf %u"; open-in-browser ; set browser "elinks %u"
+macro t set browser "librewolf-tor %u"; open-in-browser ; set browser "elinks %u"
+#macro f set browser "falkon %u"; open-in-browser ; set browser "elinks %u"
+macro s edit-flags s
+inoreader-flag-star "b"
+
+
+#use-proxy yes
+#proxy es1-wg.socks5.relays.mullvad.net:1080
+#proxy-type socks5
+############################################################
+# example1 | eg1
+# --------------------------------------------------------
+#show-keymap-hint false 
+#swap-title-and-hints false
+#browser "/usr/bin/elinks"
+#external-url-viewer "/usr/bin/urlview"
+#pager internal
+#html-renderer "/usr/bin/elinks -dump"
+#
+#bind-key j next
+#bind-key k prev
+#bind-key J next-feed
+#bind-key K prev-feed
+#bind-key j down article
+#bind-key k up article
+#bind-key J next article
+#bind-key K prev article
+#
+#macro y set browser "mpv %u"; open-in-browser ; set browser "elinks %u"
+#macro o set browser "vimprobable2 %u"; open-in-browser ; set browser "elinks %u"
+#
+#color background white default
+#color listnormal white default 
+#color listfocus white blue  standout
+#color info blue default standout
+#color listfocus_unread white blue    standout
+#color listnormal_unread white default
+#
+#feed-sort-order name
+
+
+
+############################################################
+# example2 | eg2
+# --------------------------------------------------------
+#auto-reload yes
+#browser firefox
+#cleanup-on-quit yes
+#download-path "/home/moparx/downloads/podcasts"
+#feed-sort-order title-dec
+#max-downloads 4
+#notify-always yes
+#notify-format "newsbeuter: %n unread articles within %f unread feeds"
+#notify-program notify-send
+#notify-xterm yes
+#notify-screen yes
+#player mplayer
+#refresh-on-startup yes
+#reload-time 20
+#reload-threads 2
+##show-read-articles no
+#show-read-feeds no
+#
+#
+## binds ----------------------------------------------------------------
+#
+#unbind-key t
+#unbind-key R
+#bind-key \ reload-all
+#bind-key "RIGHT" select-tag
+#bind-key "SPACE" open
+#
+#
+## hide articles matching: ---------------------------------------------
+#
+#ignore-article "*" "title =~ \"Sponsor\""
+#ignore-article "*" "title =~ \"Advertisement\""
+#ignore-mode "display"
+#
+#
+## formatting and colorization ------------------------------------------
+#
+#articlelist-format "%4i %f %D  %?T?|%-17T| ?%t"
+#
+#highlight feedlist    "^  *[0-9]+  *N  "                    color156 default
+#highlight articlelist "^  *[0-9]+  *N  "                    color156 default
+#
+#highlight article     "(^Feed:.*|^Title:.*|^Author:.*)"     color75  default
+#highlight article     "(^Link:.*|^Date:.*)"                 color75  default
+#highlight article     "^Podcast Download URL:.*"            color71  default
+#highlight article     "^Links:"                             white    color240 underline
+#highlight article     "\\[[0-9][0-9]*\\]"                   color72  default  bold
+#highlight article     "\\[image [0-9][0-9]*\\]"             color72  default  bold
+#highlight article     "\\[embedded flash: [0-9][0-9]*\\]"   color72  default  bold
+#highlight article     ":.*\\(link\\)$"                      color74  default
+#highlight article     ":.*\\(image\\)$"                     color74  default
+#highlight article     ":.*\\(embedded flash\\)$"            color74  default
+#
+#color listnormal                                            white    default
+#color listfocus                                             default  color240
+#color info                                                  default  color240
