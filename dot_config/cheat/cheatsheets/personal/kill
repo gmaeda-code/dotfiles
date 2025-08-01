@@ -1,8 +1,0 @@
-# To kill a process gracefully:
-kill -15 <pid>
-
-# To kill a process forcefully:
-kill -9 <pid>
-
-https://linuxize.com/post/kill-command-in-linux/
-https://linuxize.com/post/pkill-command-in-linux/

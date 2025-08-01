@@ -1,9 +1,0 @@
-#shell-script
-
-#複数行で記述する
-https://superuser.com/questions/508507/linux-bash-script-single-command-but-multiple-lines
-
-コメントには注意
-    backslashの後ろに入れる文には良さそう
-    1行まるまるコメントとかはできない?
-    https://stackoverflow.com/questions/9522631/how-to-put-a-line-comment-for-a-multi-line-command
